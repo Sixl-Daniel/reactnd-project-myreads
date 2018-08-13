@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Container, Image, Segment } from 'semantic-ui-react';
 
 class Footer extends Component {
