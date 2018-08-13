@@ -1,0 +1,81 @@
+@import '~semantic-ui-css/semantic.css';
+
+#root {
+    background: #000000 url('./img/erol-ahmed-460283-unsplash-w1800-h1800.jpg') no-repeat center left scroll;
+    background-size: cover;
+  }
+
+.app {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(-225deg, #ff057c85 0%, #7c64d5d9 48%, #4cc3ffcc 100%);
+}
+
+/*
+ * MENU TOP
+ */
+
+#branding h1 {
+    margin: 0;
+    line-height: 1;
+}
+
+#branding img {
+    margin-right: 1.5em;
+}
+
+/*
+ * CONTENT
+ */
+
+#content {
+    padding-top: calc(73px + 1rem);
+}
+
+.ui.segment.shelve {
+    margin: 2rem 0 4rem;
+    border-radius: 12px;
+}
+
+/*
+ * FOOTER
+ */
+
+#footer-content {
+    padding: 2em 0;
+}
+
+#footer-content img {
+    margin-bottom: 1em;
+}
+
+/*
+ * FIXED BUTTON
+ */
+
+#add-new-book-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+/*
+ * SEMANTIC-UI OVERRIDES
+ */
+
+ .ui.inverted.dividing.header {
+     border-bottom-color: rgba(255, 255, 255, 0.5);
+     margin-bottom: 3rem;
+     text-shadow: 3px 2px 7px #0000005e;
+ }
+
+ .ui.modal>.image.content {
+    align-items: flex-start;
+ }
+
+ /*
+  * MODALS
+  */
+
+.book-cover-modal-image {
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.45);
+}
