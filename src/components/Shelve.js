@@ -64,7 +64,8 @@ class Shelve extends Component {
                             </Card.Content>
                             <Card.Content>
                                 <Card.Description>
-                                    <em>ISBN {book.industryIdentifiers[0].identifier}</em>
+                                    <p><em>ISBN {book.industryIdentifiers[0].identifier}</em></p>
+                                    <p><a href={book.previewLink} target='blank'><Icon name='google' /> Show on Google Books</a></p>
                                 </Card.Description>
                             </Card.Content>
                             <Card.Content extra>
