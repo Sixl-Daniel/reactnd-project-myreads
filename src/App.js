@@ -13,11 +13,7 @@ import './App.css';
 class App extends Component {
     state = {
         books: [],
-        loading: false
-    }
-
-    componentWillMount() {
-        this.setState({ loading: true })
+        loading: true
     }
 
     componentDidMount() {
