@@ -7,7 +7,7 @@ class MenuTop extends Component {
         return (
             <Menu as='header' fixed='top' inverted borderless>
                 <Container id='branding'>
-                    <Menu.Item as={Link} exact to='/' header>
+                    <Menu.Item as={Link} to='/' header>
                         <Image size='mini' src='/logo-book.svg' />
                         <Header inverted as='h1'>
                             MyReads
