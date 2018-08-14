@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { Container } from 'semantic-ui-react';
 
+import * as LibraryHelper from './utils/LibraryHelper';
 import * as BooksAPI from './api/BooksAPI';
 
 import MenuTop from './components/MenuTop';
@@ -30,8 +32,7 @@ class App extends Component {
                 count: books.length,
                 loading: false
             });
-            // console.log(books);
-            // console.log(this.state.count);
+            console.log('Fetch and update');
         })
     }
 
@@ -40,8 +41,6 @@ class App extends Component {
     }
 
     moveBook = (shortBookObject, newShelf, oldShelf) => {
-        // console.log('Method moveBook() in App.js was called:\n' + oldShelf + ' --> ' + newShelf + '\nBook to move:');
-        // console.log(shortBookObject);
         if (shortBookObject && newShelf.length) {
             this.setState({
                 loading: true
@@ -49,9 +48,12 @@ class App extends Component {
 
             BooksAPI.update(shortBookObject, newShelf).then(books => {
                 this.getAllBooks();
+                this.notifyMovedBook(shortBookObject, newShelf, oldShelf);
             })
         }
     }
+
+    notifyMovedBook = (shortBookObject, newShelf, oldShelf) => toast(`“${shortBookObject.title}” was moved from “${LibraryHelper.getTextByShelfValue(oldShelf)}” to “${LibraryHelper.getTextByShelfValue(newShelf)}”.`)
 
     render() {
         return (
@@ -60,9 +62,9 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' render={() => (
                         <Container as='main' id='content' className='content content--home'>
-                            <Shelve title='Currently Reading' books={this.state.books} shelf='currentlyReading' loading={this.state.loading} onMoveBook={this.moveBook} />
-                            <Shelve title='Want to Read' books={this.state.books} shelf='wantToRead' loading={this.state.loading} onMoveBook={this.moveBook} />
-                            <Shelve title='Read' books={this.state.books} shelf='read' loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Shelve  title='Currently Reading' books={this.state.books} shelf='currentlyReading' loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Shelve  title='Want to Read' books={this.state.books} shelf='wantToRead' loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Shelve  title='Read' books={this.state.books} shelf='read' loading={this.state.loading} onMoveBook={this.moveBook} />
                         </Container>
                     )}/>
                     <Route exact path='/search' render={() => (
@@ -78,6 +80,7 @@ class App extends Component {
                     <Redirect from='*' to='/404' />
                 </Switch>
                 <Footer />
+                <ToastContainer autoClose={8000} position='bottom-right'/>
             </div>
         );
     }

@@ -10,7 +10,9 @@ class BookCard extends Component {
 
     render() {
 
-        const book = this.props.book;
+        // const book = this.props.book;
+
+        const { book } = this.props;
 
         if (!book.shelf) {
             book.shelf = 'none';
@@ -22,11 +24,10 @@ class BookCard extends Component {
             const hasChanged = newShelf === oldShelf ? false : true;
 
             if (hasChanged) {
-                const shortBookObject = { id: book.id };
+                const shortBookObject = { id: book.id, title: book.title };
                 this.props.onMoveBook(shortBookObject, newShelf, oldShelf);
             }
         }
-
 
         return (
             <Card>

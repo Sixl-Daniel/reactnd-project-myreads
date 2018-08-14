@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import chunk from 'lodash/chunk';
 import { Card, Icon, Header, Input, Segment } from 'semantic-ui-react';
 
 import * as Utils from '../utils/Utils';

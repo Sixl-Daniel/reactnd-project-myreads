@@ -1,11 +1,12 @@
 @import '~semantic-ui-css/semantic.css';
+@import '~react-toastify/dist/ReactToastify.css';
 
 body {
     overflow-y: scroll;
 }
 
 #root {
-    background: #000000 url('./img/erol-ahmed-460283-unsplash-w1800-h1800.jpg') no-repeat center left scroll;
+    background: #000000 url('./img/erol-ahmed-460283-unsplash-w1800-h1800.jpg') no-repeat center left fixed;
     background-size: cover;
 }
 
@@ -124,4 +125,16 @@ animation-delay: 200ms;
     .ui.modal .content > .image {
         width: auto;
     }
+}
+
+/*
+ * TOASTIFY
+ */
+
+.Toastify__toast--default {
+    color: #333333;
+}
+
+.Toastify__progress-bar--default {
+    background: linear-gradient(240deg, #3d3393 0%, #2b76b9 35%, #2cacd1 65%, #35eb93 100%);
 }

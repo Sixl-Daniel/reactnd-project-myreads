@@ -11,6 +11,12 @@ export const getIconByShelfValue = (shelfValue) => {
     return shelvesResult.length ? shelvesResult[0].icon : 'eraser';
 }
 
+export const getTextByShelfValue = (shelfValue) => {
+    if (!shelfValue) { return 'None' }
+    const shelvesResult = shelvesArray.filter((entry) => entry.value === shelfValue);
+    return shelvesResult.length ? shelvesResult[0].text : 'eraser';
+}
+
 export const getShelvesDropdownOptions = () => {
     let shelvesDropdownOptions = [];
     shelvesArray.forEach(shelf => {
