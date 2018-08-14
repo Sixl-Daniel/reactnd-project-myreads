@@ -5,7 +5,7 @@ import { Container, Header, Icon, Image, Menu } from 'semantic-ui-react';
 class MenuTop extends Component {
     render() {
         return (
-            <Menu as='header' fixed='top' inverted borderless>
+            <Menu as='header' fixed='top' inverted borderless stackable>
                 <Container id='branding'>
                     <Menu.Item as={Link} to='/' header>
                         <Image size='mini' src='/logo-book.svg' />

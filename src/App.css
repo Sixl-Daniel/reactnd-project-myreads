@@ -125,6 +125,17 @@ animation-delay: 200ms;
     .ui.modal .content > .image {
         width: auto;
     }
+    .ui.menu.fixed.stackable {
+        position: static;
+    }
+    #content {
+        padding-top: 0;
+    }
+    .ui.segment.shelve,
+    .ui.segment.search,
+    .ui.segment.not-found {
+        margin: 2rem 0;
+    }
 }
 
 /*
