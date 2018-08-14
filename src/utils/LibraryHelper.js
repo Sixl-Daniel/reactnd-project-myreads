@@ -6,6 +6,7 @@ const shelvesArray = [
 ]
 
 export const getIconByShelfValue = (shelfValue) => {
+    if (!shelfValue) { return 'eraser' }
     const shelvesResult = shelvesArray.filter((entry) => entry.value === shelfValue);
     return shelvesResult.length ? shelvesResult[0].icon : 'eraser';
 }

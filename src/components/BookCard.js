@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Divider, Dropdown, Header, Icon, Image, Label, Modal } from 'semantic-ui-react';
+import { Button, Card, Dropdown, Header, Image, Label, Modal } from 'semantic-ui-react';
 
 import * as LibraryHelper from '../utils/LibraryHelper';
 import * as Utils from '../utils/Utils';
@@ -12,6 +12,10 @@ class BookCard extends Component {
 
         const book = this.props.book;
 
+        if (!book.shelf) {
+            book.shelf = 'none';
+        }
+
         const moveThisBook = (event, data) => {
             const newShelf = data.value;
             const oldShelf = data.defaultValue;
@@ -22,6 +26,7 @@ class BookCard extends Component {
                 this.props.onMoveBook(shortBookObject, newShelf, oldShelf);
             }
         }
+
 
         return (
             <Card>
@@ -42,7 +47,9 @@ class BookCard extends Component {
                                         <React.Fragment key={'author-' + index}> and <strong>“{author}”</strong></React.Fragment>
                                 }
                             )}.</p>
-                            <p>Published by <strong>“{book.publisher || 'Unknown'}”</strong>{' in ' + book.publishedDate.slice(0, 4)||''}.</p>
+                            {book.publisher && (
+                                <p>Published by <strong>“{book.publisher}”</strong>{book.publishedDate ? ' in ' + book.publishedDate.slice(0, 4) : ''}.</p>
+                            )}
                         </Card.Description>
                     </Card.Content>
                 )}
@@ -82,14 +89,9 @@ class BookCard extends Component {
                     </Card.Description>
                 </Card.Content>
                 <Card.Content>
-                    <Dropdown
-                        placeholder='Move to another shelf&hellip;'
-                        fluid
-                        selection
-                        options={LibraryHelper.getShelvesDropdownOptions(book.shelf)}
-                        defaultValue={book.shelf}
-                        onChange={moveThisBook}
-                    />
+                    <Card.Description>
+                        Stored in shelf <Dropdown inline options={LibraryHelper.getShelvesDropdownOptions()} defaultValue={book.shelf} onChange={moveThisBook} />
+                    </Card.Description>
                 </Card.Content>
                 <Card.Content extra />
             </Card>

@@ -30,8 +30,8 @@ class App extends Component {
                 count: books.length,
                 loading: false
             });
-            console.log(books);
-            console.log(this.state.count);
+            // console.log(books);
+            // console.log(this.state.count);
         })
     }
 
@@ -42,13 +42,15 @@ class App extends Component {
     moveBook = (shortBookObject, newShelf, oldShelf) => {
         // console.log('Method moveBook() in App.js was called:\n' + oldShelf + ' --> ' + newShelf + '\nBook to move:');
         // console.log(shortBookObject);
-        this.setState({
-            loading: true
-        });
+        if (shortBookObject && newShelf.length) {
+            this.setState({
+                loading: true
+            });
 
-        BooksAPI.update(shortBookObject, newShelf).then(books => {
-            this.getAllBooks();
-        })
+            BooksAPI.update(shortBookObject, newShelf).then(books => {
+                this.getAllBooks();
+            })
+        }
     }
 
     render() {
@@ -65,7 +67,7 @@ class App extends Component {
                     )}/>
                     <Route exact path='/search' render={() => (
                         <Container as='main' id='content' className='content content--search'>
-                            <Search loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Search books={this.state.books} loading={this.state.loading} onMoveBook={this.moveBook} />
                         </Container>
                     )} />
                     <Route exact path='/404' render={() => (

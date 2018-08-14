@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import chunk from 'lodash/chunk';
 import { Card, Icon, Header, Input, Segment } from 'semantic-ui-react';
 
 import * as Utils from '../utils/Utils';
@@ -32,16 +33,7 @@ class Search extends Component {
         } else {
             this.resetSearch();
         }
-    }, 500)
-
-    resetSearch() {
-        this.setState({
-            searchQuery: '',
-            queriedBooks: [],
-            countQueriedBooks: 0,
-            loading: false
-        });
-    }
+    }, 800)
 
     getQueriedBooks = (query) => {
         BooksAPI.search(query).then((queriedBooks) => {
@@ -54,11 +46,23 @@ class Search extends Component {
         });
     }
 
-    render() {
-        const { onMoveBook } = this.props;
-        const { countQueriedBooks, loading, searchQuery } = this.state;
+    resetSearch() {
+        this.setState({
+            searchQuery: '',
+            queriedBooks: [],
+            countQueriedBooks: 0,
+            loading: false
+        });
+    }
 
-        if (this.state.queriedBooks && this.state.queriedBooks.length) {
+    render() {
+        const { books, onMoveBook } = this.props;
+        const { countQueriedBooks, loading, searchQuery, queriedBooks } = this.state;
+
+        if (queriedBooks && queriedBooks.length) {
+
+            const updatedBooks = Utils.mergeArray(queriedBooks, books, 'id');
+
             return (
                 <Segment basic as='section' className='search'>
                     <Header inverted dividing as='h2'><Icon name='book' />{countQueriedBooks} books found for query “{searchQuery}”</Header>
@@ -72,7 +76,7 @@ class Search extends Component {
                         />
                     </Segment>
                     <Card.Group centered>
-                        {this.state.queriedBooks.map(book => (
+                        {updatedBooks.map(book => (
                             <BookCard book={book} key={book.id} onMoveBook={onMoveBook} />
                         ))}
                     </Card.Group>
