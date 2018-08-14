@@ -25,6 +25,7 @@ export const get = (bookId) =>
     .then(handleErrors)
     .then(response => response.json())
     .then(data => data.book)
+    .catch(error => console.log(error));
 
 export const getAll = () =>
     fetch(`${api}/books`, {
@@ -33,6 +34,7 @@ export const getAll = () =>
     .then(handleErrors)
     .then(response => response.json())
     .then(data => data.books)
+    .catch(error => console.log(error));
 
 export const update = (book, shelf) =>
     fetch(`${api}/books/${book.id}`, {
@@ -47,6 +49,7 @@ export const update = (book, shelf) =>
     })
     .then(handleErrors)
     .then(response => response.json())
+    .catch(error => console.log(error));
 
 export const search = (query) =>
     fetch(`${api}/search`, {
@@ -62,3 +65,4 @@ export const search = (query) =>
     .then(handleErrors)
     .then(response => response.json())
     .then(data => data.books)
+    .catch(error => console.log(error));
