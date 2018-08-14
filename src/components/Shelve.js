@@ -1,43 +1,51 @@
 import React, { Component } from 'react';
-import { Card, Dimmer, Header, Icon, Loader, Segment } from 'semantic-ui-react';
+import { Card, Header, Icon, Segment } from 'semantic-ui-react';
 import BookCard from './BookCard';
+import LoadingIndicator from './LoadingIndicator';
 import * as LibraryHelper from '../utils/LibraryHelper';
 
 class Shelve extends Component {
 
-    getBookshelf() {
-        if (this.props.shelf.length) {
-            return this.props.books.filter((book) => book.shelf === this.props.shelf);
-        } else {
-            return this.props.books;
-        }
-    }
-
     render() {
+        const {
+            books,
+            loading,
+            shelf,
+            title,
+            onMoveBook
+        } = this.props;
 
-        let loadingIndicator;
-
-        if (this.props.loading === true) {
-            loadingIndicator =
-            <Dimmer active>
-                <Loader content='Books are loading' />
-            </Dimmer>;
-        } else {
-            loadingIndicator = '';
+        const getBookshelf = () => {
+            if (!shelf.length) {
+                return books;
+            } else {
+                return books.filter((book) => book.shelf === shelf);
+            }
         }
 
-        return (
-            <Segment basic as='section' className='shelve'>
-                <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(this.props.shelf)} />{this.props.title}</Header>
-                <Card.Group centered>
-                    {this.getBookshelf().map(book => (
-                        <BookCard book={book} key={book.id} onMoveBook={this.props.onMoveBook} />
-                    ))}
-                </Card.Group>
-                {loadingIndicator}
-            </Segment>
-        );
+        const booksData = getBookshelf();
 
+        if (!booksData.length) {
+            return (
+                <Segment basic as='section' className='shelve'>
+                    <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title} - empty</Header>
+                    <Header inverted size='medium' content='There are no books in this shelf.' />
+                    {loading === true && (<LoadingIndicator />)}
+                </Segment>
+            );
+        } else {
+            return (
+                <Segment basic as='section' className='shelve'>
+                    <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title}</Header>
+                    <Card.Group centered>
+                        {booksData.map(book => (
+                            <BookCard book={book} key={book.id} onMoveBook={onMoveBook} />
+                        ))}
+                    </Card.Group>
+                    {loading === true && (<LoadingIndicator />)}
+                </Segment>
+            );
+        }
     }
 }
 

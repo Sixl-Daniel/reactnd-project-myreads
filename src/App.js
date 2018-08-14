@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import * as BooksAPI from './api/BooksAPI';
+
 import MenuTop from './components/MenuTop';
 import Shelve from './components/Shelve';
 import Search from './components/Search';
@@ -29,21 +30,25 @@ class App extends Component {
                 count: books.length,
                 loading: false
             });
-            // console.log(books);
-            // console.log(this.state.count);
+            console.log(books);
+            console.log(this.state.count);
         })
-    }
-
-    moveBook(shortBookObject, newShelf, oldShelf) {
-
-        /*
-         * TODO Implement move book
-         */
-
     }
 
     componentDidMount() {
         this.getAllBooks();
+    }
+
+    moveBook = (shortBookObject, newShelf, oldShelf) => {
+        // console.log('Method moveBook() in App.js was called:\n' + oldShelf + ' --> ' + newShelf + '\nBook to move:');
+        // console.log(shortBookObject);
+        this.setState({
+            loading: true
+        });
+
+        BooksAPI.update(shortBookObject, newShelf).then(books => {
+            this.getAllBooks();
+        })
     }
 
     render() {
@@ -60,7 +65,7 @@ class App extends Component {
                     )}/>
                     <Route exact path='/search' render={() => (
                         <Container as='main' id='content' className='content content--search'>
-                            <Search books={this.state.books} loading={this.state.loading} onMoveBook={this.moveBook}/>
+                            <Search loading={this.state.loading} onMoveBook={this.moveBook} />
                         </Container>
                     )} />
                     <Route exact path='/404' render={() => (

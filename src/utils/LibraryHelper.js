@@ -2,7 +2,7 @@ const shelvesArray = [
     { id: 1, text: 'Currently Reading', value: 'currentlyReading', icon: 'eye' },
     { id: 2, text: 'Want to Read', value: 'wantToRead', icon: 'cart arrow down' },
     { id: 3, text: 'Read', value: 'read', icon: 'archive' },
-    { id: 4, text: 'None', value: '', icon: 'eraser' }
+    { id: 4, text: 'None', value: 'none', icon: 'eraser' }
 ]
 
 export const getIconByShelfValue = (shelfValue) => {
