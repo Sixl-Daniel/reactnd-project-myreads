@@ -97,7 +97,8 @@ header.top.fixed.menu {
 .ui.inverted.dividing.header {
     border-bottom-color: rgba(255, 255, 255, 0.5);
     text-shadow: 3px 2px 7px #0000005e;
-    padding: 1em;
+    padding: 0 1em 1em;
+    margin-top: 0;
 }
 
 .ui.modal > .image.content {
@@ -119,6 +120,10 @@ animation-delay: 200ms;
 .ui.cards > .card .content img.centered,
 .ui.card .content img.centered {
     display: block;
+}
+
+.ui.black.ribbon.label {
+    border-color: #3884a0 !important;
 }
 
 @media only screen and (max-width: 767px) {

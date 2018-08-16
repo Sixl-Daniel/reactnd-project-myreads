@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Header, Icon, Segment } from 'semantic-ui-react';
+import { Card, Header, Icon, Label, Segment } from 'semantic-ui-react';
 import BookCard from './BookCard';
 import LoadingIndicator from './LoadingIndicator';
 import * as LibraryHelper from '../utils/LibraryHelper';
@@ -36,6 +36,7 @@ class Shelve extends Component {
         } else {
             return (
                 <Segment basic as='section' className='shelve'>
+                    <Label color='black' ribbon='right'>{booksData.length + ' of ' + books.length + ' books'}</Label>
                     <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title}</Header>
                     <Card.Group centered>
                         {booksData.map(book => (

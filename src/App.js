@@ -17,7 +17,6 @@ import './App.css';
 class App extends Component {
     state = {
         books: [],
-        count: 0,
         loading: true
     }
 
@@ -29,7 +28,6 @@ class App extends Component {
         BooksAPI.getAll().then(books => {
             this.setState({
                 books: books,
-                count: books.length,
                 loading: false
             });
             console.log('Fetch and update');
