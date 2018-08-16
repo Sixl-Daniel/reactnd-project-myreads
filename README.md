@@ -3,7 +3,7 @@
 ![David Dependency Management Badge](https://david-dm.org/Sixl-Daniel/reactnd-project-myreads.svg)
 [![Build Status](https://travis-ci.org/Sixl-Daniel/reactnd-project-myreads.svg?branch=master)](https://travis-ci.org/Sixl-Daniel/reactnd-project-myreads)
 [![AppVeyor - Build Status](https://ci.appveyor.com/api/projects/status/n5kica58k102kysh?svg=true)](https://ci.appveyor.com/project/Sixl-Daniel/reactnd-project-myreads)
-[![CircleCI - Build Status](https://circleci.com/gh/Sixl-Daniel/reactnd-project-myreads.svg?style=svg)](https://circleci.com/gh/Sixl-Daniel/reactnd-project-myreads)
+[![CircleCI - Build Status](https://circleci.com/gh/Sixl-Daniel/reactnd-project-myreads.svg?style=svg)](https://circleci.com/gh/Sixl-Daniel/reactnd-project-myreads) [![Greenkeeper badge](https://badges.greenkeeper.io/Sixl-Daniel/reactnd-project-myreads.svg)](https://greenkeeper.io/)
 
 **MyReads** is the seventh project for the Udacity Frontend Developer Nanodegree Program.
 
