@@ -15,6 +15,14 @@
     <p><strong><a href="https://fend-project-myreads-sixl.netlify.com/">⭐ Show a demo of this app ⭐</a></strong></p>
 </div>
 
+## Table of contents
+
+- [Getting Started](#getting-started)
+- [Deployment](#deployment)
+- [Built With](#built-with)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
