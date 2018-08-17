@@ -37,24 +37,32 @@ Download the latest stable release from [https://nodejs.org/en/download/]() and 
 
 To verify your installation open your terminal and look up where node and npm were installed and check their versions:
 
-    $ which node && node -v
-    $ which npm && npm -v
+```console
+foo@bar:~$ which node && node -v
+foo@bar:~$ which npm && npm -v
+```
 
 ### Installing
 
 1. **Clone or download this repository**  
 Change to a folder you want the app folder in. Then clone the files of this repo to a new directory and changee into it: 
 
-        $ git clone https://github.com/Sixl-Daniel/reactnd-project-myreads MyNewAppDirectory
-        $ cd MyNewAppDirectory
+```console
+foo@bar:~$ git clone https://github.com/Sixl-Daniel/reactnd-project-myreads MyNewAppDirectory
+foo@bar:~$ cd MyNewAppDirectory
+```
 
 2. **Install project dependencies**
 
-        $ npm install
+```console
+foo@bar:~$ npm install
+```
 
 3. **Start the development server**
 
-        $ npm start
+```console
+foo@bar:~$ npm start
+```
 
 Then point your browser to [http://localhost:3000/]() to see the app.
 
@@ -62,7 +70,9 @@ Then point your browser to [http://localhost:3000/]() to see the app.
 
 Build the app for production to the `/build` folder:
 
-    $ npm run build
+```console
+foo@bar:~$ npm run build
+```
 
 Open your `package.json` and edit the homepage field. The app is now ready to be deployed. 
 
@@ -98,3 +108,5 @@ https://gist.github.com/nmsdvid/8807205
 https://stackoverflow.com/questions/19480008/javascript-merging-objects-by-id
 * A template to make good `README.md`  
 https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+* Understanding `this.setState({ [name]: value})`  
+https://medium.com/@bretdoucette/understanding-this-setstate-name-value-a5ef7b4ea2b4
