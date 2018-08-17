@@ -9,7 +9,6 @@ class Shelve extends Component {
         const {
             books,
             total,
-            loading,
             shelf,
             title,
             onMoveBook
