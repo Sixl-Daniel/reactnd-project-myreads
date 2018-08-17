@@ -21,7 +21,7 @@ class Search extends Component {
         });
     }
 
-    updateSearchQuery = Utils.debounceEvent((event, data) => {
+    updateSearchQuery = (event, data) => {
         const query = data.value.trim();
         if (query.length) {
             this.setState({
@@ -32,7 +32,7 @@ class Search extends Component {
         } else {
             this.resetSearch();
         }
-    }, 800)
+    }
 
     getQueriedBooks = (query) => {
         BooksAPI.search(query).then((queriedBooks) => {
