@@ -25,8 +25,7 @@ class Search extends Component {
         const query = data.value.trim();
         if (query.length) {
             this.setState({
-                searchQuery: query,
-                loading: true
+                searchQuery: query
             });
             this.getQueriedBooks(query);
         } else {
@@ -39,8 +38,7 @@ class Search extends Component {
             const countQueriedBooks = queriedBooks.length;
             this.setState({
                 queriedBooks: queriedBooks,
-                countQueriedBooks: countQueriedBooks,
-                loading: false
+                countQueriedBooks: countQueriedBooks
             });
         });
     }
