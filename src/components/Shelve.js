@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Header, Icon, Label, Segment } from 'semantic-ui-react';
 import BookCard from './BookCard';
-import LoadingIndicator from './LoadingIndicator';
 import * as LibraryHelper from '../utils/LibraryHelper';
 
 class Shelve extends Component {
@@ -22,7 +21,6 @@ class Shelve extends Component {
                     <Label color='black' ribbon='right'>empty shelf</Label>
                     <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title} - empty</Header>
                     <Header inverted size='medium' content='There are no books in this shelf.' />
-                    {loading === true && (<LoadingIndicator />)}
                 </Segment>
             );
         } else {
@@ -35,7 +33,6 @@ class Shelve extends Component {
                             <BookCard book={book} key={book.id} onMoveBook={onMoveBook} />
                         ))}
                     </Card.Group>
-                    {loading === true && (<LoadingIndicator />)}
                 </Segment>
             );
         }

@@ -11,6 +11,7 @@ import Shelve from './components/Shelve';
 import Search from './components/Search';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
+import LoadingIndicator from './components/LoadingIndicator';
 
 import './App.css';
 
@@ -101,14 +102,14 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' render={() => (
                         <Container as='main' id='content' className='content content--home'>
-                            <Shelve title='Currently Reading' books={currentlyReadingShelf} shelf='currentlyReading' loading={loading} total={total} onMoveBook={this.moveBook} />
-                            <Shelve title='Want to Read' books={wantToReadShelf} shelf='wantToRead' loading={loading} total={total} onMoveBook={this.moveBook} />
-                            <Shelve title='Read' books={readShelf} shelf='read' loading={loading} total={total} onMoveBook={this.moveBook} />
+                            <Shelve title='Currently Reading' books={currentlyReadingShelf} shelf='currentlyReading' total={total} onMoveBook={this.moveBook} />
+                            <Shelve title='Want to Read' books={wantToReadShelf} shelf='wantToRead' total={total} onMoveBook={this.moveBook} />
+                            <Shelve title='Read' books={readShelf} shelf='read' total={total} onMoveBook={this.moveBook} />
                         </Container>
                     )}/>
                     <Route exact path='/search' render={() => (
                         <Container as='main' id='content' className='content content--search'>
-                            <Search library={library} loading={loading} onMoveBook={this.moveBook} />
+                            <Search library={library} onMoveBook={this.moveBook} />
                         </Container>
                     )} />
                     <Route exact path='/404' render={() => (
@@ -119,6 +120,7 @@ class App extends Component {
                     <Redirect from='*' to='/404' />
                 </Switch>
                 <Footer />
+                {loading === true && (<LoadingIndicator />)}
                 <ToastContainer autoClose={8000} position='bottom-right'/>
             </div>
         );
