@@ -9,25 +9,17 @@ class Shelve extends Component {
     render() {
         const {
             books,
+            total,
             loading,
             shelf,
             title,
             onMoveBook
         } = this.props;
 
-        const getBookshelf = () => {
-            if (!shelf.length) {
-                return books;
-            } else {
-                return books.filter((book) => book.shelf === shelf);
-            }
-        }
-
-        const booksData = getBookshelf();
-
-        if (!booksData.length) {
+        if (!books.length) {
             return (
                 <Segment basic as='section' className='shelve'>
+                    <Label color='black' ribbon='right'>empty shelf</Label>
                     <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title} - empty</Header>
                     <Header inverted size='medium' content='There are no books in this shelf.' />
                     {loading === true && (<LoadingIndicator />)}
@@ -36,10 +28,10 @@ class Shelve extends Component {
         } else {
             return (
                 <Segment basic as='section' className='shelve'>
-                    <Label color='black' ribbon='right'>{booksData.length + ' of ' + books.length + ' books'}</Label>
+                    <Label color='black' ribbon='right'>{books.length + ' of ' + total + ' books'}</Label>
                     <Header inverted dividing as='h2'><Icon name={LibraryHelper.getIconByShelfValue(shelf)} />{title}</Header>
                     <Card.Group centered>
-                        {booksData.map(book => (
+                        {books.map(book => (
                             <BookCard book={book} key={book.id} onMoveBook={onMoveBook} />
                         ))}
                     </Card.Group>

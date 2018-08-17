@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Header, Input, Segment } from 'semantic-ui-react';
+import { Card, Icon, Header, Input, Label, Segment } from 'semantic-ui-react';
 
 import * as Utils from '../utils/Utils';
 import * as BooksAPI from '../api/BooksAPI';
@@ -54,16 +54,23 @@ class Search extends Component {
         });
     }
 
+    renderLabel(searchQuery) {
+        return (
+            <Label color='black' ribbon='right' >{searchQuery ? searchQuery : 'no query'}</Label >
+        )
+    }
+
     render() {
-        const { books, onMoveBook } = this.props;
+        const { library, onMoveBook } = this.props;
         const { countQueriedBooks, loading, searchQuery, queriedBooks } = this.state;
 
         if (queriedBooks && queriedBooks.length) {
 
-            const updatedBooks = Utils.mergeArray(queriedBooks, books, 'id');
+            let updatedBooks = Utils.mergeArray(queriedBooks, library, 'id'); /* overwrite queried books with those already in library*/
 
             return (
                 <Segment basic as='section' className='search'>
+                    {this.renderLabel(searchQuery)}
                     <Header inverted dividing as='h2'><Icon name='book' />{countQueriedBooks} books found for query “{searchQuery}”</Header>
                     <Segment basic>
                         <Input
@@ -85,6 +92,7 @@ class Search extends Component {
         } else {
             return (
                 <Segment basic as='section' className='search'>
+                    {this.renderLabel(searchQuery)}
                     <Header inverted dividing as='h2'><Icon name='search' />Search for new books</Header>
                     <Segment basic>
                         <Input

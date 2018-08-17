@@ -22,10 +22,9 @@ class BookCard extends Component {
             const newShelf = data.value;
             const oldShelf = data.defaultValue;
             const hasChanged = newShelf === oldShelf ? false : true;
-
             if (hasChanged) {
-                const shortBookObject = { id: book.id, title: book.title };
-                this.props.onMoveBook(shortBookObject, newShelf, oldShelf);
+                book.shelf = newShelf;
+                this.props.onMoveBook(book, newShelf, oldShelf);
             }
         }
 
@@ -35,7 +34,7 @@ class BookCard extends Component {
                     <Card.Header>{book.title}</Card.Header>
                     <Card.Meta>{book.subtitle}</Card.Meta>
                 </Card.Content>
-                <Card.Content>
+                <Card.Content className='light-gradient'>
                     <Image centered className='book-cover-card-image' size='small' src={book.imageLinks ? book.imageLinks.thumbnail : placeholderImage} />
                 </Card.Content>
                 {book.authors && (
@@ -90,7 +89,7 @@ class BookCard extends Component {
                     </Card.Description>
                 </Card.Content>
                 <Card.Content>
-                    <Card.Description>
+                    <Card.Description textAlign='center'>
                         Stored in shelf <Dropdown inline options={LibraryHelper.getShelvesDropdownOptions()} defaultValue={book.shelf} onChange={moveThisBook} />
                     </Card.Description>
                 </Card.Content>

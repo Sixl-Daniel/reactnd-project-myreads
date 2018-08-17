@@ -16,58 +16,99 @@ import './App.css';
 
 class App extends Component {
     state = {
-        books: [],
-        loading: true
+        loading: true,
+        currentlyReadingShelf: [],
+        wantToReadShelf: [],
+        readShelf: [],
+        noneShelf: [],
+        library: []
     }
 
     getAllBooks() {
-        this.setState({
-            loading: true
-        });
+        this.setState({ loading: true });
 
         BooksAPI.getAll().then(books => {
+            const currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
+            const wantToRead = books.filter(book => book.shelf === 'wantToRead');
+            const readShelf = books.filter(book => book.shelf === 'read');
             this.setState({
-                books: books,
-                loading: false
+                loading: false,
+                currentlyReadingShelf: currentlyReading,
+                wantToReadShelf: wantToRead,
+                readShelf: readShelf,
+                library: books
             });
-            console.log('Fetch and update');
         })
     }
+
+
 
     componentDidMount() {
         this.getAllBooks();
     }
 
-    moveBook = (shortBookObject, newShelf, oldShelf) => {
-        if (shortBookObject && newShelf.length) {
-            this.setState({
-                loading: true
-            });
+    moveBook = (book, newShelf, oldShelf) => {
+        if (book && newShelf.length && oldShelf.length) {
+            this.setState({ loading: true });
 
-            BooksAPI.update(shortBookObject, newShelf).then(books => {
-                this.getAllBooks();
-                this.notifyMovedBook(shortBookObject, newShelf, oldShelf);
-            })
+            BooksAPI.update(book, newShelf).then(response => {
+
+                const deleteBookFromShelf = () => {
+                    this.setState({
+                        [oldShelf + 'Shelf']: this.state[oldShelf + 'Shelf'].filter(item => item.id !== book.id)
+                    });
+                }
+
+                const addBookToShelf = () => {
+                    this.setState({
+                        [newShelf + 'Shelf']: this.state[newShelf + 'Shelf'].concat(book)
+                    });
+                }
+
+                const updateLibrary = () => {
+                    this.setState({
+                        library: this.state.library.filter((item) => item.id !== book.id).concat(book)
+                    });
+                }
+
+                deleteBookFromShelf();
+                addBookToShelf();
+                updateLibrary();
+
+                this.setState({ loading: false });
+
+                this.notifyMovedBook(book, newShelf, oldShelf);
+            });
         }
     }
 
-    notifyMovedBook = (shortBookObject, newShelf, oldShelf) => toast(`“${shortBookObject.title}” was moved from “${LibraryHelper.getTextByShelfValue(oldShelf)}” to “${LibraryHelper.getTextByShelfValue(newShelf)}”.`)
+    notifyMovedBook = (book, newShelf, oldShelf) => toast(`“${book.title}” was moved from “${LibraryHelper.getTextByShelfValue(oldShelf)}” to “${LibraryHelper.getTextByShelfValue(newShelf)}”.`)
 
     render() {
+        const {
+            loading,
+            currentlyReadingShelf,
+            wantToReadShelf,
+            readShelf,
+            library
+        } = this.state;
+
+        const total = currentlyReadingShelf.length + wantToReadShelf.length + readShelf.length;
+
         return (
             <div className="app">
                 <MenuTop />
                 <Switch>
                     <Route exact path='/' render={() => (
                         <Container as='main' id='content' className='content content--home'>
-                            <Shelve  title='Currently Reading' books={this.state.books} shelf='currentlyReading' loading={this.state.loading} onMoveBook={this.moveBook} />
-                            <Shelve  title='Want to Read' books={this.state.books} shelf='wantToRead' loading={this.state.loading} onMoveBook={this.moveBook} />
-                            <Shelve  title='Read' books={this.state.books} shelf='read' loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Shelve title='Currently Reading' books={currentlyReadingShelf} shelf='currentlyReading' loading={loading} total={total} onMoveBook={this.moveBook} />
+                            <Shelve title='Want to Read' books={wantToReadShelf} shelf='wantToRead' loading={loading} total={total} onMoveBook={this.moveBook} />
+                            <Shelve title='Read' books={readShelf} shelf='read' loading={loading} total={total} onMoveBook={this.moveBook} />
                         </Container>
                     )}/>
                     <Route exact path='/search' render={() => (
                         <Container as='main' id='content' className='content content--search'>
-                            <Search books={this.state.books} loading={this.state.loading} onMoveBook={this.moveBook} />
+                            <Search library={library} loading={loading} onMoveBook={this.moveBook} />
                         </Container>
                     )} />
                     <Route exact path='/404' render={() => (
